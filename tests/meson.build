@@ -11,3 +11,4 @@ gtest               = dependency('gtest')
 dependencies = [conjugate_dep, gtest]
 
 test('vector-operation', executable('vector-operation', 'vector-operation.cpp', dependencies: dependencies))
+test('matrix-operation', executable('matrix-operation', 'matrix-operation.cpp', dependencies: dependencies))
