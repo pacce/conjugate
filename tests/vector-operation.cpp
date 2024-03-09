@@ -32,6 +32,20 @@ TEST(ADDITION, IDENTITY) {
     EXPECT_EQ(xs + ys, xs);
 }
 
+TEST(DOT, COMMUTATIVE) {
+    conjugate::Vector<float, 100> xs(1.0f);
+    conjugate::Vector<float, 100> ys(2.0f);
+
+    EXPECT_EQ(xs.dot(ys), ys.dot(xs));
+}
+
+TEST(DOT, SCALING) {
+    conjugate::Vector<float, 100> xs(1.0f);
+    conjugate::Vector<float, 100> ys(2.0f);
+
+    EXPECT_EQ(xs.dot(2.0f * ys), 2.0f * xs.dot(ys));
+}
+
 int
 main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);

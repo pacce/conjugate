@@ -61,20 +61,6 @@ namespace conjugate {
                 return value_.end();
             }
 
-            friend Vector<T, N>
-            operator+(const Vector<T, N>& lhs, const Vector<T, N>& rhs) {
-                Vector<T, N> result = {};
-                for (size_type i = 0; i < N; i++) { result[i] = lhs[i] + rhs[i]; }
-                return result;
-            }
-
-            friend Vector<T, N>
-            operator-(const Vector<T, N>& lhs, const Vector<T, N>& rhs) {
-                Vector<T, N> result = {};
-                for (size_type i = 0; i < N; i++) { result[i] = lhs[i] - rhs[i]; }
-                return result;
-            }
-
             friend bool
             operator==(const Vector<T, N>& lhs, const Vector<T, N>& rhs) {
                 const T TOLERANCE = 1e-3;
@@ -91,6 +77,42 @@ namespace conjugate {
             friend bool
             operator!=(const Vector<T, N>& lhs, const Vector<T, N>& rhs) {
                 return (not (lhs == rhs));
+            }
+            friend Vector<T, N>
+            operator+(const Vector<T, N>& lhs, const Vector<T, N>& rhs) {
+                Vector<T, N> result = {};
+                for (size_type i = 0; i < N; i++) { result[i] = lhs[i] + rhs[i]; }
+                return result;
+            }
+
+            friend Vector<T, N>
+            operator-(const Vector<T, N>& lhs, const Vector<T, N>& rhs) {
+                Vector<T, N> result = {};
+                for (size_type i = 0; i < N; i++) { result[i] = lhs[i] - rhs[i]; }
+                return result;
+            }
+
+            friend Vector<T, N>
+            operator*(const Vector<T, N>& v, T scalar) {
+                Vector<T, N> result = v;
+                for (size_type i = 0; i < N; i++) { result[i] *= scalar; }
+                return result;
+            }
+
+            friend Vector<T, N>
+            operator*(T scalar, const Vector<T, N>& v) {
+                Vector<T, N> result = v;
+                for (size_type i = 0; i < N; i++) { result[i] *= scalar; }
+                return result;
+            }
+
+            value_type
+            dot(const Vector<T, N>& other) const {
+                value_type sum = 0.0;
+                for (size_type i = 0; i < N; i++) {
+                    sum += (value_[i] * other[i]);
+                }
+                return sum;
             }
         private:
             std::array<T, N> value_;
